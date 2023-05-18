@@ -9,7 +9,7 @@ from .forms import AddPublisherForm, AddBookForm, AddAuthorForm
 # Create your views here.
 
 
-def books(request):
+def all_books(request):
     book_list = Book.objects.all()
     paginator = Paginator(book_list, 10)
     page_number = request.GET.get('page')
@@ -18,15 +18,15 @@ def books(request):
     return render(request, 'all_books.html', {'books': page_object})
 
 
-def book_detail(request, id):
+def book_info(request, id):
     book = Book.objects.get(id=id)
     formatted_date = book.publication_date.strftime("%Y-%m-%d")
     authors = Author.objects.all()
     publishers = Publisher.objects.all()
-    return render(request, 'book_detail.html', {'book': book, 'authors': authors, 'publishers': publishers, 'date': formatted_date})
+    return render(request, 'book_info.html', {'book': book, 'authors': authors, 'publishers': publishers, 'date': formatted_date})
 
 
-def add_book(request):
+def new_book(request):
     if request.method == 'POST':
         form = AddBookForm(request.POST, request.FILES)
         if form.is_valid():
@@ -34,10 +34,10 @@ def add_book(request):
             return redirect('all_books')
     else:
         form = AddBookForm()
-    return render(request, 'add_data.html', {'form': form})
+    return render(request, 'add_new.html', {'form': form})
 
 
-def add_author(request):
+def new_author(request):
     if request.method == 'POST':
         form = AddAuthorForm(request.POST)
         if form.is_valid():
@@ -45,10 +45,10 @@ def add_author(request):
             return redirect('all_books')
     else:
         form = AddAuthorForm()
-    return render(request, 'add_data.html', {'form': form})
+    return render(request, 'add_new.html', {'form': form})
 
 
-def add_publisher(request):
+def new_publisher(request):
     if request.method == 'POST':
         form = AddPublisherForm(request.POST)
         if form.is_valid():
@@ -56,10 +56,10 @@ def add_publisher(request):
             return redirect('all_books')
     else:
         form = AddPublisherForm()
-    return render(request, 'add_data.html', {'form': form})
+    return render(request, 'add_new.html', {'form': form})
 
 
-def login_view(request):
+def login_func(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -74,7 +74,7 @@ def login_view(request):
     return render(request, 'login.html')
 
 
-def update_book(request, id):
+def alter_book(request, id):
     book = Book.objects.get(id=id)
 
     if request.method == 'POST':

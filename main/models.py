@@ -4,18 +4,18 @@ from django.db import models
 
 
 class Publisher(models.Model):
-    name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=100)
     email = models.EmailField()
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=255)
-    author = models.ForeignKey(Author, on_delete=models.PROTECT)
-    publisher = models.ForeignKey(Publisher, on_delete=models.PROTECT)
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     publication_date = models.DateField()
-    cover_photo = models.ImageField(upload_to='media/')
+    cover_photo = models.ImageField(upload_to='photos/')

@@ -60,13 +60,13 @@ class Migration(migrations.Migration):
                 (
                     "author",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT, to="main.author"
+                        on_delete=django.db.models.deletion.PROTECT, to="library.author"
                     ),
                 ),
                 (
                     "publisher",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT, to="main.publisher"
+                        on_delete=django.db.models.deletion.PROTECT, to="library.publisher"
                     ),
                 ),
             ],

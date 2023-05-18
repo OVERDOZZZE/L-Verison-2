@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% for book in books %}
+    <ul>
+        <li>
+            <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
+            {{ book.author.name }}
+            {{ book.publisher.name }}
+            {{ book.publication_date }}
+        </li>
+    </ul>
+    {% endfor %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current-page">{{ page_obj.number }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

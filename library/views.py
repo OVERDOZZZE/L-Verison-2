@@ -20,10 +20,9 @@ def all_books(request):
 
 def book_info(request, id):
     book = Book.objects.get(id=id)
-    formatted_date = book.publication_date.strftime("%Y-%m-%d")
     authors = Author.objects.all()
     publishers = Publisher.objects.all()
-    return render(request, 'book_info.html', {'book': book, 'authors': authors, 'publishers': publishers, 'date': formatted_date})
+    return render(request, 'book_info.html', {'book': book, 'authors': authors, 'publishers': publishers})
 
 
 def new_book(request):
@@ -74,16 +73,3 @@ def login_func(request):
     return render(request, 'login.html')
 
 
-def alter_book(request, id):
-    book = Book.objects.get(id=id)
-
-    if request.method == 'POST':
-        book.title = request.POST.get('title')
-        book.author = Author.objects.get(id=request.POST.get('author_id'))
-        book.publisher = Publisher.objects.get(id=request.POST.get('publisher_id'))
-        book.publication_date = request.POST.get('publication_date')
-        if request.POST.get('cover_photo'):
-            book.cover_photo = '{}{}'.format('media/', request.POST.get('cover_photo'))
-        book.save()
-
-    return redirect('book_detail', id=id)

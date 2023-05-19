@@ -20,10 +20,10 @@ def all_books(request):
 
 def book_info(request, id):
     book = Book.objects.get(id=id)
-    formatted_date = book.publication_date.strftime("%Y-%m-%d")
     authors = Author.objects.all()
+    date = book.publication_date.strftime("%Y-%m-%d")
     publishers = Publisher.objects.all()
-    return render(request, 'book_info.html', {'book': book, 'authors': authors, 'publishers': publishers, 'date': formatted_date})
+    return render(request, 'book_info.html', {'book': book, 'authors': authors, 'publishers': publishers, 'date': date})
 
 
 def new_book(request):

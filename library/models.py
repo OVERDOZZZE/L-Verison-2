@@ -18,4 +18,4 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     publication_date = models.DateField()
-    cover_photo = models.ImageField(upload_to='photos/')
+    cover_photo = models.ImageField(upload_to='media/')

@@ -11,7 +11,7 @@ from .forms import AddPublisherForm, AddBookForm, AddAuthorForm
 
 def all_books(request):
     book_list = Book.objects.all()
-    paginator = Paginator(book_list, 1)
+    paginator = Paginator(book_list, 3)
     page_number = request.GET.get('page')
     page_object = paginator.get_page(page_number)
 
@@ -92,3 +92,6 @@ def alter_book(request, id):
         book.save()
         return redirect('book_detail', id=id)
 
+
+def main(request):
+    return render(request, 'main.html')
